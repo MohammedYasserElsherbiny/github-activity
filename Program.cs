@@ -27,11 +27,9 @@ namespace github_activity
 
             client.DefaultRequestHeaders.Add("User-Agent", "github-tracker-cli");
 
-            string url = $"https://api.github.com/users/{username}/events";
-
             try
             {
-                HttpResponseMessage respone = await client.GetAsync(url);
+                HttpResponseMessage respone = await client.GetAsync($"https://api.github.com/users/{username}/events");
 
                 if (respone.IsSuccessStatusCode)
                 {
