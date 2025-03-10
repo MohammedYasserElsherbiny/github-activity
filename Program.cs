@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace github_activity
 {
@@ -51,13 +52,13 @@ namespace github_activity
             {
                 Console.WriteLine($"Network Error: {e.Message}");
             }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Unexpected Error: {e.Message}");
-            }
             catch(jsonException e)
             {
                 Console.WriteLine($"JSON Error: {e.Message}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Unexpected Error: {e.Message}");
             }
         }
     }
