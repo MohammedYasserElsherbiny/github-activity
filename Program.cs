@@ -35,6 +35,12 @@ namespace github_activity
                 {
                     string json = await respone.Content.ReadAsStringAsync();
 
+                    if(string.IsNullOrWhiteSpace(json))
+                    {
+                        Console.WriteLine("No data found for the given username.");
+                        return;
+                    }
+
                     using JsonDocument doc = JsonDocument.Parse(json);
                     string formattedJson = JsonSerializer.Serialize(doc.RootElement, new JsonSerializerOptions { WriteIndented = true });
 
@@ -43,7 +49,15 @@ namespace github_activity
             }
             catch (HttpRequestException e)
             {
-                Console.WriteLine($"Error: {e.Message}");
+                Console.WriteLine($"Network Error: {e.Message}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Unexpected Error: {e.Message}");
+            }
+            catch(jsonException e)
+            {
+                Console.WriteLine($"JSON Error: {e.Message}");
             }
         }
     }
